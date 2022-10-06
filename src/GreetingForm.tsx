@@ -4,13 +4,24 @@ import { useState } from "react";
 const SERVER_URL =
   process.env.REACT_APP_SERVER_URL ?? "http://localhost:8000/api";
 
-interface GreetingJsonRpcResult {
-  id: string;
-  jsonrpc: string;
-  result: GreetingResult;
+interface GreetingJsonRpcParams {
+  name: string;
 }
 
-interface GreetingResult {
+interface GreetingJsonRpcResponse {
+  id: string;
+  jsonrpc: string;
+  result: GreetingJsonRpcResult;
+}
+
+interface GreetingJsonRpcRequest {
+  id: string;
+  jsonrpc: string;
+  method: string;
+  params: GreetingJsonRpcParams;
+}
+
+interface GreetingJsonRpcResult {
   greeting: string;
 }
 
@@ -30,13 +41,22 @@ const GreetingForm = () => {
 
   const fetchGreeting = () => {
     axios
-      .post<GreetingJsonRpcResult>(SERVER_URL, {
-        cancelToken: cancelTokenSource.token,
-        headers: {
-          "Content-Type": "application/json",
+      .post<GreetingJsonRpcResponse>(
+        SERVER_URL,
+        {
+          id: "1",
+          jsonrpc: "2.0",
+          method: "greeting",
+          params: { name },
         },
-        timeout: 10000,
-      })
+        {
+          cancelToken: cancelTokenSource.token,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 10000,
+        }
+      )
       .then((response) => {
         setGreeting(response.data.result.greeting);
         setIsFetching(false);
