@@ -40,15 +40,16 @@ const GreetingForm = () => {
   };
 
   const fetchGreeting = () => {
+    const request: GreetingJsonRpcRequest = {
+      id: "00000000-0000-0000-0000-000000000000",
+      jsonrpc: "2.0",
+      method: "greeting",
+      params: { name },
+    };
     axios
       .post<GreetingJsonRpcResponse>(
         SERVER_URL,
-        {
-          id: "1",
-          jsonrpc: "2.0",
-          method: "greeting",
-          params: { name },
-        },
+        request,
         {
           cancelToken: cancelTokenSource.token,
           headers: {
