@@ -1,0 +1,13 @@
+name: app-client
+region: sfo
+static_sites:
+  - build_command: npm run build
+    environment_slug: node-js
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: intrepion/intrepion-greeting-json-rpc-client-web-typescript-react
+    name: client
+    routes:
+      - path: /
+    source_dir: /
