@@ -47,17 +47,13 @@ const GreetingForm = () => {
       params: { name },
     };
     axios
-      .post<GreetingJsonRpcResponse>(
-        SERVER_URL,
-        request,
-        {
-          cancelToken: cancelTokenSource.token,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          timeout: 10000,
-        }
-      )
+      .post<GreetingJsonRpcResponse>(SERVER_URL, request, {
+        cancelToken: cancelTokenSource.token,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 10000,
+      })
       .then((response) => {
         setGreeting(response.data.result.greeting);
         setIsFetching(false);
