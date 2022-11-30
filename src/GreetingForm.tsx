@@ -78,6 +78,9 @@ const GreetingForm = () => {
 
   return (
     <div>
+      <p>
+        Server URL: <a href={SERVER_URL}>{SERVER_URL}</a>
+      </p>
       <label htmlFor="inputName">
         Enter name:
         <input
