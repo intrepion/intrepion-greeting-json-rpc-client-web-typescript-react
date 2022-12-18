@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const SERVER_URL =
-  process.env.REACT_APP_SERVER_URL ?? "http://localhost:3000";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? "http://localhost:3000";
 
 interface GreetingJsonRpcParams {
   name: string;
