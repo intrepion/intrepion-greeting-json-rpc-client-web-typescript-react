@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import Greeting from "./Greeting";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? "http://localhost:3000";
 
@@ -100,7 +101,7 @@ const GreetingForm = () => {
         Submit
       </button>
       {isFetching && <button onClick={handleCancelClick}>Cancel</button>}
-      <p className="greeting">{greeting}</p>
+      <Greeting greeting={greeting} />
       {error && <p className="error">{error}</p>}
     </div>
   );
